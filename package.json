@@ -1,134 +1,144 @@
 {
-    "name": "graphql-swagger-example",
-    "version": "1.0.0",
-    "private": false,
-    "main": "dist/src/index.js",
-    "typings": "dist/src/index.d.ts",
-    "engines": {
-      "node": ">=10.0.0"
-    },
-    "pre-push": [
-      "lint"
+  "name": "graphql-swagger-example",
+  "version": "1.0.0",
+  "private": false,
+  "main": "dist/src/index.js",
+  "typings": "dist/src/index.d.ts",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "pre-push": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkarabashev/graphql-swagger-example.git"
+  },
+  "author": "Maksim Karabashev",
+  "keywords": [
+    "graphql",
+    "node",
+    "typescript",
+    "microservices",
+    "gateway",
+    "swagger"
+  ],
+  "description": "graphql swagger example",
+  "scripts": {
+    "build": "tsc --rootDir ./",
+    "build:watch": "tsc --rootDir ./ -w",
+    "circular": "madge --circular dist/",
+    "clean": "rm -fr dist",
+    "precoverage": "mkdir -p coverage && touch coverage/coverage-summary.json",
+    "coverage": "NODE_ENV=test && jest --coverage --no-cache --reporters=\"default\" \"jest-junit\"",
+    "coverage:watch": "yarn coverage --watch",
+    "lint": "tslint -p .",
+    "postinstall": "yarn build",
+    "prebuild": "yarn clean",
+    "start": "node --harmony dist/src/gateway/index.js",
+    "start:rest": "node --harmony dist/src/pokemons/index.js",
+    "test": "NODE_ENV=test && jest --color",
+    "test:watch": "yarn test --watch",
+    "test:detect": "yarn test --detectOpenHandles"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.0",
+    "@hapi/joi": "^15.0.3",
+    "@hapi/vision": "^5.5.2",
+    "hapi-swagger": "^10.0.2",
+    "typescript": "^3.4.3"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.0.7",
+    "@graphql-codegen/core": "^1.0.7",
+    "@graphql-codegen/typescript": "^1.0.7",
+    "@graphql-codegen/typescript-resolvers": "^1.0.7",
+    "@types/graphql": "^14.2.0",
+    "@types/hapi": "^18.0.2",
+    "@types/hapi__hapi": "^18.2.3",
+    "@types/hapi__inert": "^5.2.0",
+    "@types/hapi__joi": "^15.0.1",
+    "@types/hapi__vision": "^5.5.0",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.13.4",
+    "command-line-args": "^5.1.1",
+    "jest": "^24.7.1",
+    "jest-junit": "^6.3.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript-eslint-parser": "^22.0.0"
+  },
+  "jest-junit": {
+    "output": "./coverage/junit/junit.xml"
+  },
+  "jest": {
+    "testMatch": [
+      "**/?(*.)(spec|test).ts"
     ],
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/mkarabashev/graphql-swagger-example.git"
-    },
-    "author": "Maksim Karabashev",
-    "keywords": [
-      "graphql",
-      "node",
-      "typescript",
-      "microservices",
-      "gateway",
-      "swagger"
+    "roots": [
+      "<rootDir>/test/"
     ],
-    "description": "graphql swagger example",
-    "scripts": {
-      "build": "tsc --rootDir ./",
-      "build:watch": "tsc --rootDir ./ -w",
-      "circular": "madge --circular dist/",
-      "clean": "rm -fr dist",
-      "precoverage": "mkdir -p coverage && touch coverage/coverage-summary.json",
-      "coverage": "NODE_ENV=test && jest --coverage --no-cache --reporters=\"default\" \"jest-junit\"",
-      "coverage:watch": "yarn coverage --watch",
-      "lint": "tslint -p .",
-      "postinstall": "yarn build",
-      "prebuild": "yarn clean",
-      "start": "node --harmony dist/src/gateway/index.js",
-      "start:rest": "node --harmony dist/src/users/index.js",
-      "test": "NODE_ENV=test && jest --color",
-      "test:watch": "yarn test --watch",
-      "test:detect": "yarn test --detectOpenHandles"
+    "bail": false,
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
     },
-    "dependencies": {
-      "typescript": "^3.4.3"
-    },
-    "devDependencies": {
-      "@graphql-codegen/cli": "^1.0.7",
-      "@graphql-codegen/core": "^1.0.7",
-      "@graphql-codegen/typescript": "^1.0.7",
-      "@graphql-codegen/typescript-resolvers": "^1.0.7",
-      "@types/graphql": "^14.2.0",
-      "@types/jest": "^24.0.11",
-      "@types/node": "^11.13.4",
-      "command-line-args": "^5.1.1",
-      "jest": "^24.7.1",
-      "jest-junit": "^6.3.0",
-      "ts-jest": "^24.0.2",
-      "tslint": "^5.15.0",
-      "tslint-config-prettier": "^1.18.0",
-      "tslint-config-standard": "^8.0.1",
-      "typescript-eslint-parser": "^22.0.0"
-    },
-    "jest-junit": {
-      "output": "./coverage/junit/junit.xml"
-    },
-    "jest": {
-      "testMatch": [
-        "**/?(*.)(spec|test).ts"
-      ],
-      "roots": [
-        "<rootDir>/test/"
-      ],
-      "bail": false,
-      "testEnvironment": "node",
-      "transform": {
-        "^.+\\.tsx?$": "ts-jest"
-      },
-      "testPathIgnorePatterns": [
-        "/node_modules/"
-      ],
-      "moduleFileExtensions": [
-        "ts",
-        "tsx",
-        "js",
-        "jsx",
-        "json"
-      ],
-      "coverageDirectory": "./coverage",
-      "coveragePathIgnorePatterns": [
-        "node_modules"
-      ],
-      "collectCoverageFrom": [
-        "src/**/*.{ts,tsx}",
-        "!src/**/*Context.ts",
-        "!src/**/Types.ts",
-        "!src/**/*Client.ts",
-        "!src/env/env*.ts",
-        "!src/index.ts",
-        "!src/logger.ts"
-      ],
-      "coverageReporters": [
-        "text",
-        "html",
-        "json-summary"
-      ],
-      "coverageThreshold": {
-        "global": {
-          "branches": 80,
-          "functions": 80,
-          "lines": 80,
-          "statements": 80
-        }
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "coverageDirectory": "./coverage",
+    "coveragePathIgnorePatterns": [
+      "node_modules"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*Context.ts",
+      "!src/**/Types.ts",
+      "!src/**/*Client.ts",
+      "!src/env/env*.ts",
+      "!src/index.ts",
+      "!src/logger.ts"
+    ],
+    "coverageReporters": [
+      "text",
+      "html",
+      "json-summary"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
       }
-    },
-    "prettier": {
-      "semi": false,
-      "singleQuote": true,
-      "trailingComma": "es5",
-      "tabWidth": 4,
-      "printWidth": 120
-    },
-    "lint-staged": {
-      "src/**/*.{js,ts,tsx,css}": [
-        "prettier --write",
-        "git add"
-      ],
-      "src/**/*.{ts,tsx}": [
-        "tslint --type-check -p tsconfig.json",
-        "git add"
-      ]
-    },
-    "license": "MIT"
-  }
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "printWidth": 120
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx,css}": [
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{ts,tsx}": [
+      "tslint --type-check -p tsconfig.json",
+      "git add"
+    ]
+  },
+  "license": "MIT"
+}
