@@ -13,14 +13,7 @@ console.log(swaggerPlugin)
     const server = await new Hapi.Server({
         host: 'localhost',
         port: 3000,
-    });
-
-    const swaggerOptions = {
-        info: {
-            title: 'Test API Documentation',
-            version: '1',
-        },
-    }
+    })
 
     await server.register([
         Inert,
@@ -32,7 +25,7 @@ console.log(swaggerPlugin)
         await server.start();
         console.log('Server running at:', server.info.uri);
     } catch(err) {
-        console.log(err);
+        console.log(err)
     }
 
     server.route(pokemons);

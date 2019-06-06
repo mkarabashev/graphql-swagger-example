@@ -18,6 +18,14 @@ export const pokemons: ServerRoute = {
                     .required()
                     .description('The pokemon ID')
             }
+        },
+        response: {
+            status: {
+                200: Joi.object({
+                    id: Joi.number().required(),
+                    name: Joi.string().required(),
+                })
+            }
         }
     }
 }
